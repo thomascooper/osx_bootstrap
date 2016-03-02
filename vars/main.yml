@@ -1,0 +1,38 @@
+dockitems_to_remove:
+  - Mail
+  - Safari
+  - Contacts
+  - Reminders
+  - Maps
+  - Photos
+  - Messages
+  - FaceTime
+  - iTunes
+  - iBooks
+  - App Store
+  - System Preferences
+  - Chrome App Launcher
+
+dockitems_to_persist:
+  - name: Google Chrome
+    path: "/Applications/Google Chrome.app"
+    pos: 2
+  - name: Firefox
+    path: "/Users/tomcooper/Applications/Firefox.app"
+    pos: 3
+  - name: Atom
+    path: "~/Applications/Atom.app"
+    pos: 6
+  - name: PhpStorm
+    path: "~/Applications/PhpStorm.app"
+    pos: 7
+
+  # - name: Slack
+  #   path: /Applications/Slack.app
+  #   pos: 4
+  # - name: VirtualBox
+  #   path: /Applications/VirtualBox.app
+  #   pos: 5
+  # - name: Terminal
+  #   path: /Applications/Utilities/Terminal.app
+  #   pos: 6

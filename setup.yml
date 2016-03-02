@@ -1,0 +1,51 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+
+  vars_files:
+    - vars/main.yml
+  tasks:
+    - name: tap caskroom/versions
+      homebrew_tap: tap=caskroom/versions state=present
+
+    - name: install developer brew applications
+      homebrew: name={{item}} state=latest
+      with_items:
+        - wget
+        - htop
+        - watch
+        - ssh-copy-id
+        - dockutil
+
+    - name: install developer tap applications
+      homebrew_tap: tap={{item}} state=present
+      with_items:
+        - caskroom/cask
+        - caskroom/versions
+
+    - name: install developer cask applications
+      homebrew_cask: name={{item}} state=present
+      with_items:
+        - google-chrome
+        - atom
+        - sequel-pro
+        - dropbox
+        - firefox
+        - vagrant
+        - virtualbox
+        - phpstorm
+        - slack
+        - istat-menus
+
+    - name: Remove all crap from Dock
+      shell: dockutil --remove '{{ item }}'
+      ignore_errors: true
+      with_items: '{{ dockitems_to_remove }}'
+
+    - name: Check if items in dock exist
+      shell: dockutil --find '{{ item.name }}' || dockutil --add '{{ item.path }}'
+      with_items: '{{ dockitems_to_persist }}'
+
+    - name: Fix order
+      shell: dockutil --move '{{ item.name }}' --position {{ item.pos }}
+      with_items: '{{ dockitems_to_persist }}'
